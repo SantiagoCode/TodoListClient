@@ -1,6 +1,8 @@
 const ButtonClose = ({ handle }) => {
   return (
-    <button className="go_back" onClick={() => handle()}>{'<'}</button>
+    <button className="go_back" onClick={() => handle()}>
+      <img src="/img/go_back.svg" className="go_back_img" alt="Go Back" />
+    </button>
   )
 }
 

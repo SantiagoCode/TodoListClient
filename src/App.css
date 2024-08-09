@@ -135,9 +135,18 @@
 }
 
 button.go_back {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   position: absolute;
   top: 1rem;
   left: 1rem;
+}
+
+button.go_back .go_back_img {
+  width: 1rem;
+  aspect-ratio: 1;
 }
 
 .buttons-delete {

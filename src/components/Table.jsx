@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { fetchData } from "../utils/fetchData";
 
 const apiData = fetchData('https://localhost:7277/api/TodoItems');
@@ -20,9 +20,9 @@ const Table = ({
       setShowStatus(false);
     }, 500)
   }, []);
-
-  const data = apiData.read();
-
+  
+  const [data, setData] = useState(apiData.read())
+    
   return (
     <section className="table_container">
       <div id="header">
@@ -36,7 +36,7 @@ const Table = ({
 
       <div className="list">
         <ul>
-          {data.map((item, index) => (
+          {data && data.map((item, index) => (
             <li className="item" key={index}>
               <div className="data">
                 <p className="id">{item.id}</p>
