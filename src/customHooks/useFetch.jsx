@@ -4,12 +4,12 @@ import { useTasks } from './../context/TaskContext';
 const useFetch = (endpoint) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const { fetchTasks } = useTasks();
+  const { handleFetch } = useTasks();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        await fetchTasks(endpoint);
+        await handleFetch.fetchTasks(endpoint);
       } catch (error) {
         setError(error);
       } finally {
@@ -18,7 +18,7 @@ const useFetch = (endpoint) => {
     };
 
     fetchData();
-  }, [endpoint, fetchTasks]);
+  }, []);
 
   return { loading, error };
 };

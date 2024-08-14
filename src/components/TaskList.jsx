@@ -1,23 +1,31 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import useFetch from './../customHooks/useFetch';
 import { useTasks } from './../context/TaskContext';
+import Telon from './../components/Telon.jsx'
 
 const TaskList = () => {
   const { loading, error } = useFetch('https://localhost:7277/api/TodoItems');
-  const { tasks, addTask, updateTask, deleteTask } = useTasks();
+  const { tasks, setShowModal, setModalType, setSelectedTask, setModalAction } = useTasks();
 
   const handleAddTask = () => {
-    const newTask = { name: 'New Task', completed: false };
-    addTask(newTask);
+    setShowModal(true)
+    setModalType('Nuevo Item')
+    setSelectedTask({})
+    setModalAction('addTask')
   };
 
   const handleUpdateTask = (task) => {
-    const updatedTask = { ...task, completed: !task.completed };
-    updateTask(updatedTask);
+    setShowModal(true)
+    setModalType('Edit Item')
+    setSelectedTask(task)
+    setModalAction('updateTask')
   };
 
   const handleDeleteTask = (taskId) => {
-    deleteTask(taskId);
+    setShowModal(true)
+    setModalType('Delete Item')
+    setSelectedTask(taskId)
+    setModalAction('deleteTask')
   };
 
   if (loading) return <p>Loading...</p>;
@@ -27,10 +35,10 @@ const TaskList = () => {
     <section className="table_container">
       <div id="header">
         <h2>
-          Listado de Actividades
+          Task List
         </h2>
         <button className="new_item" onClick={handleAddTask}>
-          Nueva Tarea
+          Create Task
         </button>
       </div>
 
@@ -39,17 +47,19 @@ const TaskList = () => {
           {tasks && tasks.map((task, index) => (
             <li className="item" key={index}>
               <div className="data">
-                <p className="id">{task.id}</p>
+                <p className="status">{task.isComplete ? '✅' : '🚫'}</p>
+                <span> ~ </span>
                 <p className="name">{task.name}</p>
               </div>
               <div className="item_actions">
-                <button className="edit" onClick={() => handleUpdateTask(task)}>Editar</button>
-                <button className="delete" onClick={() => handleDeleteTask(task.id)}>Eliminar</button>
+                <button className="edit" onClick={() => handleUpdateTask(task)}>Update</button>
+                <button className="delete" onClick={() => handleDeleteTask(task.id)}>Delete</button>
               </div>
             </li>
           ))}
         </ul>
       </div>
+      <Telon show={loading} />
     </section>
   )
 };

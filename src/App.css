@@ -123,7 +123,7 @@
   align-items: center;
 }
 
-#modal .modal_content {
+#modal .modal_container {
   position: relative;
   width: 50%;
   background: #080808;
@@ -132,6 +132,37 @@
   max-width: 700px;
   padding: 1rem;
   box-sizing: border-box;
+}
+
+#modal .modal_content {
+  margin-top: 2rem;
+}
+
+#modal .modal_content label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 0.4rem;
+}
+
+#modal .modal_content label input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.8rem 0.4rem;
+  margin: 0.2rem 0;
+  border: none;
+}
+
+#modal .modal_content .label_check {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 0.4rem;
+}
+
+#modal .modal_content .label_check input {
+  width: unset;
+  margin-right: 0.8rem;
 }
 
 button.go_back {
